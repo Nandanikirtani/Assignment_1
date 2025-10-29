@@ -1,8 +1,13 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "http://localhost:5000/api",
+  baseURL:
+    process.env.NODE_ENV === "production"
+      ? "https://assignment-1-ikmo.onrender.com/api" // Render backend
+      : "http://localhost:5000/api", // Local backend
+  withCredentials: true,
 });
+
 
 // Add token to requests automatically
 API.interceptors.request.use((config) => {
